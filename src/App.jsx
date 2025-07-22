@@ -4,6 +4,7 @@ import Header from './components/Header';
 import URLInput from './components/URLInput';
 import AnalysisResults from './components/AnalysisResults';
 import LoadingSpinner from './components/LoadingSpinner';
+import Footer from './components/Footer';
 import { analyzeCSSUsage } from './utils/cssAnalyzer';
 
 function App() {
@@ -27,10 +28,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
-      
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 flex-grow">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -52,9 +52,7 @@ function App() {
           className="max-w-4xl mx-auto"
         >
           <URLInput onAnalyze={handleAnalyze} isAnalyzing={isAnalyzing} />
-          
           {isAnalyzing && <LoadingSpinner />}
-          
           {error && (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -64,10 +62,10 @@ function App() {
               <p className="text-red-700 font-medium">Error: {error}</p>
             </motion.div>
           )}
-          
           {results && <AnalysisResults results={results} />}
         </motion.div>
       </div>
+      <Footer />
     </div>
   );
 }
